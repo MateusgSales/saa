@@ -20,8 +20,8 @@ public class Alunos implements Serializable {
 	@SequenceGenerator(name="alunos_seq", sequenceName="alunos_seq", allocationSize=1)
 	@GeneratedValue(generator="alunos_seq", strategy=GenerationType.SEQUENCE)
 	
-	
-    private long id;
+
+	private Long id;
 	
 	@Column(nullable=false)
 	private String nome;

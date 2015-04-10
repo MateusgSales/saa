@@ -22,25 +22,12 @@ public class TurmasDAO {
 	public void atualizar(Turmas turma){
 		entityManager.merge(turma);
 	}
-	@SuppressWarnings("unchecked")
-	public List<Turmas> listarPorNome(String nome) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Turmas> criteriaQuery = criteriaBuilder.createQuery(Turmas.class);
-		Root<Turmas> turma = criteriaQuery.from(Turmas.class);
-		criteriaQuery.where(criteriaBuilder.like(turma.<String>get("nome"), "%"+nome+"%"));
-		
-		Query query = entityManager.createQuery(criteriaQuery);
-		return query.getResultList();
-	}
+	
 	
 	public Turmas buscaPorId(Integer id) {
-		String jpql = "select u from Professores u where u.id = :id";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("id", id);
 		
-		return (Turmas) query.getSingleResult();
+		return (Turmas) entityManager.find(Turmas.class, id);
 	}
-	
 	public void excluir(Turmas turma) {
 		entityManager.remove(turma);
 	}

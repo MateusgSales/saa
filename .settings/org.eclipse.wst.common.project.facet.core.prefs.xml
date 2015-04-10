@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 <root>
   <facet id="jst.jsf">
     <node name="libprov">
@@ -7,21 +5,3 @@
     </node>
   </facet>
 </root>
-=======
-<root>
-  <facet id="jst.jsf">
-    <node name="libprov">
-      <attribute name="provider-id" value="jsf-no-op-library-provider"/>
-    </node>
-  </facet>
-</root>
->>>>>>> branch 'master' of https://github.com/MateusgSales/saa.git
-=======
-<root>
-  <facet id="jst.jsf">
-    <node name="libprov">
-      <attribute name="provider-id" value="jsf-no-op-library-provider"/>
-    </node>
-  </facet>
-</root>
->>>>>>> branch 'master' of https://github.com/MateusgSales/saa.git

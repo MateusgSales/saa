@@ -17,33 +17,26 @@ import br.unifor.pin.saa.entity.Alunos;
 @Transactional(propagation=Propagation.REQUIRED)
 public class AlunosDAO {
 
-	@PersistenceContext
+	@PersistenceContext //injetar o objeto dentro do entitymanager
+	//permite operações como alvar, atualizar e excluir no entitymanager
 	private EntityManager entityManager;
 	
-	public void salvar(Alunos professores) {
-		entityManager.persist(professores);
+	public void salvar(Alunos alunos) {
+		entityManager.persist(alunos);
+		//persistir um aluno.
 	}
 	
-	public void atualizar(Alunos professores){
-		entityManager.merge(professores);
+	public void atualizar(Alunos alunos){
+		entityManager.merge(alunos);
 	}
-	@SuppressWarnings("unchecked")
-	public List<Alunos> listarPorNome(String nome) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Alunos> criteriaQuery = criteriaBuilder.createQuery(Alunos.class);
-		Root<Alunos> alunos = criteriaQuery.from(Alunos.class);
-		criteriaQuery.where(criteriaBuilder.like(alunos.<String>get("nome"), "%"+nome+"%"));
-		
-		Query query = entityManager.createQuery(criteriaQuery);
-		return query.getResultList();
+	
+	public void excluir(Alunos alunos) {
+		entityManager.remove(alunos);
 	}
 	
 	public Alunos buscaPorId(Long id) {
-		String jpql = "select u from Alunos u where u.id = :id";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("id", id);
 		
-		return (Alunos) query.getSingleResult();
+		return (Alunos) entityManager.find(Alunos.class, id);
 	}
 	
 	public Alunos buscarPorNome(String nome){
@@ -54,7 +47,4 @@ public class AlunosDAO {
 		return (Alunos) query.getSingleResult();
 	}
 	
-	public void excluir(Alunos alunos) {
-		entityManager.remove(alunos);
-	}
 }

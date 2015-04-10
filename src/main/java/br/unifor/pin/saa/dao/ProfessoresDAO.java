@@ -30,34 +30,21 @@ public class ProfessoresDAO {
 	public void atualizar(Professores professores){
 		entityManager.merge(professores);
 	}
-	@SuppressWarnings("unchecked")
-	public List<Professores> listarPorNome(String nome) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Professores> criteriaQuery = criteriaBuilder.createQuery(Professores.class);
-		Root<Professores> professores = criteriaQuery.from(Professores.class);
-		criteriaQuery.where(criteriaBuilder.like(professores.<String>get("nome"), "%"+nome+"%"));
-		
-		Query query = entityManager.createQuery(criteriaQuery);
-		return query.getResultList();
+
+	public void excluir(Professores professores) {
+		entityManager.remove(professores);
 	}
 	
 	public Professores buscaPorId(Long id) {
-		String jpql = "select u from Professores u where u.id = :id";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("id", id);
-		
-		return (Professores) query.getSingleResult();
+		return (Professores) entityManager.find(Professores.class, id);
 	}
 	
 	public Professores buscarPorNome(String nome){
-		String jpql = "select u from Professores u where u.nome = :nome";
+		String jpql = "select r from Professores r where r.nome = :nome";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("nome", nome);
 		
 		return (Professores) query.getSingleResult();
 	}
 	
-	public void excluir(Professores professores) {
-		entityManager.remove(professores);
-	}
 }
