@@ -14,12 +14,14 @@ import javax.persistence.Table;
 @Table(name="alunos")
 public class Alunos implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2338483406601691379L;
 
 	@Id
 	@SequenceGenerator(name="alunos_seq", sequenceName="alunos_seq", allocationSize=1)
 	@GeneratedValue(generator="alunos_seq", strategy=GenerationType.SEQUENCE)
-	private Long id;
+	
+	
+    private long id;
 	
 	@Column(nullable=false)
 	private String nome;
