@@ -46,15 +46,15 @@ public class AlunosDAOTest {
 		aluno.setNome(nome);
 
 		alunoDAO.salvar(aluno);
-		Alunos alunoRetorno = alunoDAO.buscarPorNome(nome);
+		Alunos alunoNovoNome = alunoDAO.buscarPorNome(nome);
 
-		alunoRetorno.setNome(nomeAlterado);
-		alunoDAO.atualizar(alunoRetorno);
+		alunoNovoNome.setNome(nomeAlterado);
+		alunoDAO.atualizar(alunoNovoNome);
 
 		Alunos alunoNovo = alunoDAO.buscarPorNome(nomeAlterado);
 		assertNotNull(alunoNovo);
 
-		alunoDAO.excluir(alunoRetorno);
+		alunoDAO.excluir(alunoNovoNome);
 	}
 
 	@Test
