@@ -14,58 +14,63 @@ import br.unifor.pin.saa.entity.Alunos;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-context.xml")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class AlunosDAOTest {
 
 	@Autowired
 	private AlunosDAO alunoDAO;
-	
+
 	@Test
 	public void testSalvar() {
 		final String nome = "Rafael";
 		Alunos aluno = new Alunos();
 		aluno.setNome(nome);
-		
-		
+
 		alunoDAO.salvar(aluno);
+		//Quem criou esse metodo "buscarPorNome"?
 		Alunos alunoRetorno = alunoDAO.buscarPorNome(nome);
+		//esse metodo verifica se a variavel que esta estornando não esta nula
 		assertNotNull(alunoRetorno);
+		//esse metodo compara se o objeto retornado é igual ao objeto que foi criado para o teste
+		assertEquals(nome, alunoRetorno);
+		//exclui o objeto que foi incluido, retornando 
 		alunoDAO.excluir(alunoRetorno);
-		
+
 	}
+
 	@Test
-	public void testAtualizar(){
+	public void testAtualizar() {
 		final String nome = "Rafael";
 		final String nomeAlterado = "Alice";
 		Alunos aluno = new Alunos();
 		aluno.setNome(nome);
-		
+
 		alunoDAO.salvar(aluno);
 		Alunos alunoRetorno = alunoDAO.buscarPorNome(nome);
-		
+
 		alunoRetorno.setNome(nomeAlterado);
 		alunoDAO.atualizar(alunoRetorno);
-		
+
 		Alunos alunoNovo = alunoDAO.buscarPorNome(nomeAlterado);
 		assertNotNull(alunoNovo);
-		
+
 		alunoDAO.excluir(alunoRetorno);
 	}
-	
+
 	@Test
-	public void testBuscarPorId(){
+	public void testBuscarPorId() {
 		final String nome = "Rafael";
 		Alunos aluno = new Alunos();
 		aluno.setNome(nome);
-		
+
 		alunoDAO.salvar(aluno);
 		Alunos alunoRetorno = alunoDAO.buscarPorNome(nome);
 		Long id = alunoRetorno.getId();
 		Alunos alunoNovo = alunoDAO.buscaPorId(id);
-		
+
 		assertNotNull(alunoNovo);
-		
+
 		alunoDAO.excluir(alunoRetorno);
 	}
-	
+
 }
