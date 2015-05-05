@@ -1,6 +1,6 @@
 package br.unifor.pin.saa.dao;
 
-import junit.framework.Assert;
+import static junit.framework.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ public class AlunosDAOTest {
 		
 		alunoDAO.salvar(aluno);
 		Alunos alunoRetorno = alunoDAO.buscarPorNome(nome);
-		Assert.assertNotNull(alunoRetorno);
+		assertNotNull(alunoRetorno);
 		alunoDAO.excluir(alunoRetorno);
 		
 	}
@@ -47,7 +47,7 @@ public class AlunosDAOTest {
 		alunoDAO.atualizar(alunoRetorno);
 		
 		Alunos alunoNovo = alunoDAO.buscarPorNome(nomeAlterado);
-		Assert.assertNotNull(alunoNovo);
+		assertNotNull(alunoNovo);
 		
 		alunoDAO.excluir(alunoRetorno);
 	}
@@ -63,7 +63,7 @@ public class AlunosDAOTest {
 		Long id = alunoRetorno.getId();
 		Alunos alunoNovo = alunoDAO.buscaPorId(id);
 		
-		Assert.assertNotNull(alunoNovo);
+		assertNotNull(alunoNovo);
 		
 		alunoDAO.excluir(alunoRetorno);
 	}
