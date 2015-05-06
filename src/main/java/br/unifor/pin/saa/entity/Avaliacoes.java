@@ -11,24 +11,28 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Avaliacoes")
+@Table(name = "Avaliacoes")
 public class Avaliacoes implements Serializable {
 
-	
 	private static final long serialVersionUID = -7295837088686452760L;
 
 	@Id
-	@SequenceGenerator(name="Avaliacoes_seq", sequenceName="Avaliacoes_seq", allocationSize=1)
-	@GeneratedValue(generator="Avaliacoes_seq", strategy=GenerationType.SEQUENCE)
-	
+	@SequenceGenerator(name = "Avaliacoes_seq", sequenceName = "Avaliacoes_seq", allocationSize = 1)
+	@GeneratedValue(generator = "Avaliacoes_seq", strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String aulas;
 
 	@Column
 	private String aluno;
-	
+
+	@Column
+	private String nota;
+
+	@Column
+	private String situacaoAprovacao;
+
 	public Long getId() {
 		return id;
 	}
@@ -61,22 +65,34 @@ public class Avaliacoes implements Serializable {
 		this.nota = nota;
 	}
 
-	public String getAprovado() {
-		return aprovado;
+	
+
+	/**
+	 * @deprecated Use {@link #getSituacaoAprovacao()} instead
+	 */
+	public String getSituacaoAluno() {
+		return getSituacaoAprovacao();
 	}
 
-	public void setAprovado(String aprovado) {
-		this.aprovado = aprovado;
+	public String getSituacaoAprovacao() {
+		return situacaoAprovacao;
+	}
+
+	
+
+	/**
+	 * @deprecated Use {@link #setSituacaoAprovacao(String)} instead
+	 */
+	public void setSituacaoAluno(String aprovado) {
+		setSituacaoAprovacao(aprovado);
+	}
+
+	public void setSituacaoAprovacao(String aprovado) {
+		this.situacaoAprovacao = aprovado;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	@Column
-	private String nota;
-	
-	@Column
-	private String aprovado;
-	
 }

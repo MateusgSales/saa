@@ -2,6 +2,7 @@ package br.unifor.pin.saa.dao;
 
 import static junit.framework.Assert.*;
 
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,12 @@ public class AlunosDAOTest {
 		Alunos aluno = new Alunos();
 		aluno.setNome(nome);
 
+		//Persistindo aluno
 		alunoDAO.salvar(aluno);
-		//Quem criou esse metodo "buscarPorNome"?
 		Alunos alunoRetorno = alunoDAO.buscarPorNome(nome);
-		//esse metodo verifica se a variavel que esta estornando não esta nula
+		// esse metodo verifica se a variavel que esta estornando não esta nula
 		assertNotNull(alunoRetorno);
-		//esse metodo compara se o objeto retornado é igual ao objeto que foi criado para o teste
-		assertEquals(nome, alunoRetorno);
-		//exclui o objeto que foi incluido, retornando 
+		// exclui o objeto que foi incluido, retornando
 		alunoDAO.excluir(alunoRetorno);
 
 	}
@@ -71,6 +70,22 @@ public class AlunosDAOTest {
 		assertNotNull(alunoNovo);
 
 		alunoDAO.excluir(alunoRetorno);
+	}
+
+	@Test
+	public void testBuscarPorNome() {
+		final String nome = "Matheus";
+
+		Alunos aluno = new Alunos();
+		aluno.setNome(nome);
+
+		alunoDAO.salvar(aluno);
+		aluno = alunoDAO.buscarPorNome(aluno.getNome());
+
+		assertEquals(nome, aluno.getNome());
+
+		alunoDAO.excluir(aluno);
+
 	}
 
 }
