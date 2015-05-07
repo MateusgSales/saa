@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,11 +26,12 @@ public class Avaliacoes implements Serializable {
 	@Column(nullable = false)
 	private String aulas;
 
+	@ManyToOne
+	@JoinColumn(name="aluno_id")
+	private Alunos aluno;
+	
 	@Column
-	private String aluno;
-
-	@Column
-	private String nota;
+	private Double nota;
 
 	@Column
 	private String situacaoAprovacao;
@@ -49,19 +52,19 @@ public class Avaliacoes implements Serializable {
 		this.aulas = aulas;
 	}
 
-	public String getAluno() {
+	public Alunos getAluno() {
 		return aluno;
 	}
 
-	public void setAluno(String aluno) {
+	public void setAluno(Alunos aluno) {
 		this.aluno = aluno;
 	}
 
-	public String getNota() {
+	public Double getNota() {
 		return nota;
 	}
 
-	public void setNota(String nota) {
+	public void setNota(Double nota) {
 		this.nota = nota;
 	}
 
