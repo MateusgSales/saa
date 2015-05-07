@@ -27,6 +27,11 @@ public class InstituicoesDAO {
 		entityManager.remove(instituicao);
 	}
 	
+	public Instituicoes buscarPorNome(String nome){//Incluido metodo buscar.
+		return entityManager.find(Instituicoes.class, nome); 
+		
+	} 
+	
 	public Instituicoes buscarPorId(Long id){//Incluido metodo buscar.
 		return entityManager.find(Instituicoes.class, id);
 		
