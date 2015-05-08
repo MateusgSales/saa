@@ -43,7 +43,7 @@ public class UsuarioBO {
 		return usuarios;
 	}
 	
-	public Usuarios buscarPorId(Integer id){
+	public Usuarios buscarPorId(Long id){
 		return usuarioDAO.buscaPorId(id);
 	}
 	

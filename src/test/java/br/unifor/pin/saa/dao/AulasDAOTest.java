@@ -1,8 +1,8 @@
 package br.unifor.pin.saa.dao;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
+import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,43 +15,40 @@ import br.unifor.pin.saa.entity.Aulas;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-context.xml")
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation=Propagation.REQUIRED)
 public class AulasDAOTest {
 	@Autowired
 	private AulasDAO aulasDAO;
-
+	
 	@Test
 	public void testSalvar() {
 		Aulas aulas = new Aulas();
-
+		
 		aulasDAO.salvar(aulas);
-
+		
 		Aulas aulasRetorno = aulasDAO.buscarPorId(aulas.getId());
+		
+	    Assert.assertNotNull(aulasRetorno);
 
-		assertNotNull(aulasRetorno);
-
-		aulasDAO.excluir(aulasRetorno);
+	    aulasDAO.excluir(aulasRetorno);
 	}
-
-	/*
-	 * @Test
-	 * 
-	 * public void testAtualizar(){
-	 * 
-	 * }
-	 */
-
+	
+	@Ignore
+	public void testAtualizar(){
+		
+	}
+	
 	@Test
-	public void testBuscarPorId() {
+	public void testBuscarPorId(){
 		Aulas aulas = new Aulas();
-
+		
 		aulasDAO.salvar(aulas);
-
+		
 		Aulas aulasRetorno = aulasDAO.buscarPorId(aulas.getId());
+		
+	    Assert.assertEquals(aulas,aulasRetorno);
 
-		assertEquals(aulas, aulasRetorno);
-
-		aulasDAO.excluir(aulasRetorno);
+	    aulasDAO.excluir(aulasRetorno);
 	}
 
 }

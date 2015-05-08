@@ -1,7 +1,7 @@
 package br.unifor.pin.saa.dao;
 
-import static junit.framework.Assert.*;
-
+import static org.junit.Assert.*;
+import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,9 +15,10 @@ import br.unifor.pin.saa.entity.Alunos;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-context.xml")
-@Transactional(propagation = Propagation.REQUIRED)
-public class AlunosDAOTest {
+@Transactional(propagation=Propagation.REQUIRED)
 
+public class AlunosDAOTest {
+	
 	@Autowired
 	private AlunosDAO alunoDAO;
 
@@ -44,31 +45,29 @@ public class AlunosDAOTest {
 		Alunos aluno = new Alunos();
 		aluno.setNome(nome);
 
+		
 		alunoDAO.salvar(aluno);
-		Alunos alunoNovoNome = alunoDAO.buscarPorNome(nome);
+		aluno.setNome(nomeAlterado);		
+		alunoDAO.atualizar(aluno);
 
-		alunoNovoNome.setNome(nomeAlterado);
-		alunoDAO.atualizar(alunoNovoNome);
-
-		Alunos alunoNovo = alunoDAO.buscarPorNome(nomeAlterado);
-		assertNotNull(alunoNovo);
-
-		alunoDAO.excluir(alunoNovoNome);
+		Assert.assertEquals(nomeAlterado, aluno.getNome());
+		
+		alunoDAO.excluir(aluno);
 	}
 
 	@Test
 	public void testBuscarPorId() {
-		final String nome = "Rafael";
+		final String nome = "Matheus";	
 		Alunos aluno = new Alunos();
-		aluno.setNome(nome);
-
+		aluno.setNome(nome);	
 		alunoDAO.salvar(aluno);
+		
 		Alunos alunoRetorno = alunoDAO.buscarPorNome(nome);
 		Long id = alunoRetorno.getId();
 		Alunos alunoNovo = alunoDAO.buscaPorId(id);
-
-		assertNotNull(alunoNovo);
-
+		
+		Assert.assertNotNull(alunoNovo);
+		
 		alunoDAO.excluir(alunoRetorno);
 	}
 
@@ -78,12 +77,12 @@ public class AlunosDAOTest {
 
 		Alunos aluno = new Alunos();
 		aluno.setNome(nome);
-
+		
 		alunoDAO.salvar(aluno);
 		aluno = alunoDAO.buscarPorNome(aluno.getNome());
-
-		assertEquals(nome, aluno.getNome());
-
+		
+		Assert.assertNotNull(aluno);
+		
 		alunoDAO.excluir(aluno);
 
 	}

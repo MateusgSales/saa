@@ -22,7 +22,7 @@ public class Turmas implements Serializable {
 	private Long id;
 	
 	@Column(nullable=false)
-	private String semestre;
+	private Integer semestre;
 	
 	@Column(nullable=false)
 	private String disciplina;
@@ -35,11 +35,11 @@ public class Turmas implements Serializable {
 		this.id = id;
 	}
 
-	public String getSemestre() {
+	public Integer getSemestre() {
 		return semestre;
 	}
 
-	public void setSemestre(String semestre) {
+	public void setSemestre(Integer semestre) {
 		this.semestre = semestre;
 	}
 

@@ -41,5 +41,7 @@ public class ProfessoresDAO {
 	public Professores buscarPorId(Long id){
 		return entityManager.find(Professores.class, id);
 	}
+
+	
 	
 }

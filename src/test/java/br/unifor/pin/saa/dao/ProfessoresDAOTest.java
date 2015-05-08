@@ -1,8 +1,6 @@
 package br.unifor.pin.saa.dao;
-
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+
+
+
+
 
 import br.unifor.pin.saa.entity.Professores;
 
@@ -24,16 +27,15 @@ public class ProfessoresDAOTest {
 	public void testSalvar() {
 		final String nome = "Mendes";
 		
-		Professores professores = new Professores();
-		professores.setNome(nome);
+		Professores professor = new Professores();
+		professor.setNome(nome);
 		
-		professoresDAO.salvar(professores);
+		professoresDAO.salvar(professor);
 		
-		professores = professoresDAO.buscaPorId(professores.getId());
+		professor = professoresDAO.buscarPorNome(professor.getNome());
+		Assert.assertNotNull(professor);
 		
-		Assert.assertNotNull(professores);
-		
-		professoresDAO.excluir(professores);
+		professoresDAO.excluir(professor);
 		
 	}
 	
@@ -42,48 +44,50 @@ public class ProfessoresDAOTest {
 		final String nome = "Mendes";
 		final String nomeAlterado = "Matheus";
 		
-		Professores professores = new Professores();
-		professores.setNome(nome);
-		professoresDAO.salvar(professores);
+		Professores professor = new Professores();
+		professor.setNome(nome);
 		
-		professores.setNome(nomeAlterado);
-		professoresDAO.atualizar(professores);
+		professoresDAO.salvar(professor);
+		professor.setNome(nomeAlterado);
+		professoresDAO.atualizar(professor);
 		
-		Assert.assertEquals(nomeAlterado, professores.getNome());
+		professor = professoresDAO.buscarPorId(professor.getId());
+		Assert.assertEquals(nomeAlterado, professor.getNome());
 		
-		professoresDAO.excluir(professores);
-		
+		professoresDAO.excluir(professor);
 	}
 	@Test
 	public void testBuscarPorId(){
 		final String nome = "Mendes";
 		
-		Professores professores = new Professores();
-		professores.setNome(nome);
-		professoresDAO.salvar(professores);
+		Professores professor = new Professores();
+		professor.setNome(nome);
 		
-		Professores professoresAlterado = new Professores();
-		professoresAlterado = professoresDAO.buscaPorId(professores.getId());
+		professoresDAO.salvar(professor);
+							
+		Professores professorRetorno = professoresDAO.buscarPorNome(professor.getNome());
+		Long id = professorRetorno.getId();
+		Professores professorNovo= professoresDAO.buscarPorId(id);
 		
-		Assert.assertNotNull(professoresAlterado);
+		Assert.assertNotNull(professorNovo);
 		
-		professoresDAO.excluir(professoresAlterado);
+		professoresDAO.excluir(professorRetorno);
 		
 	}
-	@Ignore
+	
 	public void testBuscarPorNome(){
 		final String nome = "Mendes";
 		
-		Professores professores = new Professores();
-		professores.setNome(nome);
-		professoresDAO.salvar(professores);
+		Professores professor = new Professores();
+		professor.setNome(nome);
 		
-		Professores professoresAlterado = new Professores();
-		professoresAlterado = professoresDAO.buscarPorNome(professores.getNome());
+		professoresDAO.salvar(professor);
+							
+		professor = professoresDAO.buscarPorNome(professor.getNome());
 		
-		Assert.assertEquals(nome,professoresAlterado);
+		Assert.assertNotNull(professor);
 		
-		professoresDAO.excluir(professoresAlterado);
+		professoresDAO.excluir(professor);
 		
 	}
 }
