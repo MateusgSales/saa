@@ -14,9 +14,9 @@ import br.unifor.pin.saa.entity.Aulas;
 public class AulasDAO {
 
 	@PersistenceContext//O "@PersistenceContext" é responsável por injetar um objeto dentro do entityManager
-	private EntityManager entityManager;
+	private static EntityManager entityManager;
 		
-	public void salvar(Aulas aulas) {//Incluido metodo salvar.
+	public static void salvar(Aulas aulas) {//Incluido metodo salvar.
 		entityManager.persist(aulas);
 	}
 	public void atualizar(Aulas aulas) {//Incluido metodo atualizar.
