@@ -1,3 +1,4 @@
+
 package br.unifor.pin.saa.dao;
 
 import java.util.List;
@@ -44,6 +45,14 @@ public class ProfessoresDAO {
 		
 		Query query = entityManager.createQuery(criteriaQuery);
 		return query.getResultList();
+	}
+	
+	public Professores buscarPorNome(String nome) {
+		String jpql = "select i from Professores i where i.nome = :nome";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("nome", nome);
+		
+		return (Professores) query.getSingleResult();
 	}
 	
 	public Professores buscaPorId(Long id) {

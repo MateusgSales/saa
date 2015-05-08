@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.unifor.pin.saa.entity.Cursa;
+import br.unifor.pin.saa.entity.Instituicoes;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/test-context.xml")
@@ -62,13 +63,49 @@ public class CursaDaoTest {
 	}
 
 	@Test
-	public void testExcluir() {
+	public void testBuscarPorNome() {
+		final String turma = "A";		
+		final String aluno = "Matheus";
+		Cursa cursa = new Cursa();
+		
+		cursa.setAluno(aluno);
+		cursa.setTurma(turma);
+		cursaDAO.salvar(cursa);
+		
+		cursa = cursaDAO.buscarPorAlumo(cursa.getAluno());
+		Assert.assertNotNull(cursa);
+		
+		cursaDAO.excluir(cursa);
 		
 	}
+	
+	
 
 	@Test
 	public void testBuscarPorId() {
 		
+		final String turma = "A";		
+		final String aluno = "Matheus";
+		Cursa cursa = new Cursa();
+		
+		cursa.setAluno(aluno);
+		cursa.setTurma(turma);
+		cursaDAO.salvar(cursa);
+		
+		Long id = cursa.getID();
+		Cursa cursaNovo= cursaDAO.buscarPorId(id);
+		Assert.assertNotNull(cursaNovo.getID());
+		
+		cursaDAO.excluir(cursaNovo);
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
+

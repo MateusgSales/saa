@@ -31,4 +31,9 @@ public class CursaDAO {
 		return entityManager.find(Cursa.class, id);
 	
     }
+	
+	public Cursa buscarPorAlumo(String aluno){//Incluido metodo buscar.
+		return entityManager.find(Cursa.class, aluno); 
+		
+	} 
 }
