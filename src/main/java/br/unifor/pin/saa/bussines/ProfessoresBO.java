@@ -8,8 +8,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.unifor.pin.saa.aspectj.Loggable;
-import br.unifor.pin.saa.dao.AulasDAO;
+import br.unifor.pin.saa.dao.ProfessoresDAO;
 import br.unifor.pin.saa.entity.Aulas;
+import br.unifor.pin.saa.entity.Professores;
 import br.unifor.pin.saa.exceptions.DAOException;
 /**
  * @author rafael.mendes
@@ -17,26 +18,25 @@ import br.unifor.pin.saa.exceptions.DAOException;
  */
 @Loggable
 @Component
-public class AulasBO {
+public class ProfessoresBO {
 
 	@Autowired
-	private AulasDAO aulasDAO;
+	private ProfessoresDAO professoresDAO;
 	
-	public void salvar(Aulas aulas) {
-		aulas.setTurma("1700");
-		aulas.setDescrição("Turma Inicial");
-		aulasDAO.salvar(aulas);
+	public void salvar(Professores professores) {
+		professores.setNome("Rafael");
+		professoresDAO.salvar(professores);
 	}
 	
-	public void atualizar(Aulas aulas){
-		aulasDAO.atualizar(aulas);
+	public void atualizar(Professores professores){
+		professoresDAO.atualizar(professores);
 		
 	}
 
 	@Loggable(enable=false)
-	public List<Aulas> listaPorTurna(String turma) {
-		List<Aulas> aulas = aulasDAO.listarPorTurma(turma);
-		return aulas;
+	public List<Professores> listaPorNome(String nome) {
+		List<Professores> nome = professoresDAO.listarPorNome(nome);
+		return nome;
 	}
 	
 	public Aulas buscarPorId(Long id){
