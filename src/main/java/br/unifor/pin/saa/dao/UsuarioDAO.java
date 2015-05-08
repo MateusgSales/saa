@@ -42,8 +42,8 @@ public class UsuarioDAO {
 		return query.getResultList();
 	}
 	
-	public Usuarios buscaPorId(Integer id) {
-		String jpql = "select u from Usuarios u where u.id = :id";
+	public Usuarios buscaPorId(Long id) {
+		String jpql = "select a from Usuarios a where a.id = :id";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("id", id);
 		
@@ -54,3 +54,4 @@ public class UsuarioDAO {
 		entityManager.remove(usuario);
 	}
 }
+
